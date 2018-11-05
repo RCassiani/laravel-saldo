@@ -19,8 +19,8 @@ class CreateHistoricsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type', ['I','O','T']);
             $table->double('amount',10,2);
-            $table->double('total_before',10,2);
-            $table->double('total_after',10,2);
+            $table->double('total_before',10,2)->default(0);
+            $table->double('total_after',10,2)->default(0);
             $table->integer('user_id_transaction')->nullable();
             $table->date('date');
             $table->timestamps();

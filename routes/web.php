@@ -12,8 +12,12 @@
 */
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'],function (){
-    Route::get('/', 'AdminController@index')->name('admin.home');
-    Route::get('balance', 'BalanceController@index')->name('admin.balance');
+    $this->get('/', 'AdminController@index')->name('admin.home');
+
+    $this->get('balance', 'BalanceController@index')->name('admin.balance');
+    $this->get('deposit', 'BalanceController@deposit')->name('balance.deposit');    $this->get('balance/deposit', 'BalanceController@deposit')->name('balance.deposit');
+
+    $this->post('deposit', 'BalanceController@depositStore')->name('deposit.store');    $this->get('balance/deposit', 'BalanceController@deposit')->name('balance.deposit');
 });
 
 Route::get('/', 'Site\SiteController@index')->name('site');
