@@ -14,13 +14,24 @@
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'],function (){
     $this->get('/', 'AdminController@index')->name('admin.home');
 
+    //Saldo
     $this->get('balance', 'BalanceController@index')->name('admin.balance');
-    $this->get('deposit', 'BalanceController@deposit')->name('balance.deposit');
-    $this->get('withdraw', 'BalanceController@withdraw')->name('balance.withdraw');
-    $this->get('transfer', 'BalanceController@transfer')->name('balance.transfer');
 
+    //Depósito
+    $this->get('deposit', 'BalanceController@deposit')->name('balance.deposit');
     $this->post('deposit', 'BalanceController@depositStore')->name('deposit.store');
+
+    //Saque
+    $this->get('withdraw', 'BalanceController@withdraw')->name('balance.withdraw');
     $this->post('withdraw', 'BalanceController@withdrawStore')->name('withdraw.store');
+
+    //Transferência
+    $this->get('transfer', 'BalanceController@transfer')->name('balance.transfer');
+    $this->post('confirm-transfer', 'BalanceController@transferConfirm')->name('transfer.confirm');
+    $this->post('transfer', 'BalanceController@transferStore')->name('transfer.store');
+
+    //Historico
+    $this->get('historic', 'BalanceController@historic')->name('balance.historic');
 });
 
 Route::get('/', 'Site\SiteController@index')->name('site');
