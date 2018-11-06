@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Balance;
+use App\Models\Historic;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -95,10 +96,24 @@ class BalanceController extends Controller
                     ->with('error',$response['message']);
     }
 
-    public function historic()
+    public function historic(Historic $historic)
     {
-        $historics = auth()->user()->historics()->with('userReceiver')->get();
-        return view('admin.balance.historic', compact('historics'));
+        $historics = auth()->user()
+                                ->historics()
+                                ->with('userReceiver')
+                                ->paginate(10);
+
+        $types = $historic->type();
+        return view('admin.balance.historic', compact('historics','types'));
+    }
+
+    public function searchHistoric(Request $request, Historic $historic)
+    {
+        $data = $request->except('_token');
+        $historics = $historic->search($data);
+        $types = $historic->type();
+
+        return view('admin.balance.historic', compact('historics','types','data'));
     }
 
 }

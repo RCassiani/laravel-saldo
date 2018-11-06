@@ -31,7 +31,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     $this->post('transfer', 'BalanceController@transferStore')->name('transfer.store');
 
     //Historico
-    $this->get('historic', 'BalanceController@historic')->name('balance.historic');
+    $this->get('historic-search', 'BalanceController@historic')->name('balance.historic');
+    $this->any('historic', 'BalanceController@searchHistoric')->name('historic.search');
 });
 
 Route::get('/', 'Site\SiteController@index')->name('site');
