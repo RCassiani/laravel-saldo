@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Home Dashboard')
+@section('title', 'Sacar')
 
 @section('content_header')
     <h1>Saque</h1>
     <ol class="breadcrumb">
         <li><a href="">Dashboard</a></li>
         <li><a href="">Saldo</a></li>
-        <li><a href="">Saque</a></li>
+        <li><a href="">Sacar</a></li>
     </ol>
 @stop
 
